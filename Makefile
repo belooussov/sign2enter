@@ -18,7 +18,9 @@ test:
 retest:
 	vagrant halt
 	vagrant destroy -f
-	vagrant up
+	vagrant up --provider=virtualbox
+
+clean:
+	rm -rf roles/ssh/files/ roles/test_ssh/files/id_rsa roles/test_ssh/files/id_rsa-cert.pub roles/test_ssh/files/id_rsa.pub
 
 all: ca userkey sign retest test
-
