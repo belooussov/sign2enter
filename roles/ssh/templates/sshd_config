@@ -2,7 +2,7 @@
 # ansible_managed
 
 
-#AuthorizedKeysFile /dev/null
+AuthorizedKeysFile /dev/null
 ChallengeResponseAuthentication no
 ClientAliveInterval 300
 Compression yes

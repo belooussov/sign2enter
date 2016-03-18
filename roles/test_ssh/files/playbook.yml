@@ -1,0 +1,7 @@
+#!/usr/bin/env ansible-playbook
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: 'remove motd'
+    file: path=/etc/motd state=absent

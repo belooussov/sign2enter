@@ -17,8 +17,7 @@
   become: yes
   user: name={{ item }} state=present
   with_items:
-    - vagrant
-    - userkey
+    - "{{ ansible_user }}"
 
 - name: 'build and write /etc/ssh/sshd_config file'
   become: yes

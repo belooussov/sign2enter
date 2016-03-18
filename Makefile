@@ -12,10 +12,13 @@ userkey:
 sign:
 	ssh-keygen -s roles/ssh/files/ca_key -I id_vagrant -n vagrant roles/test_ssh/files/id_rsa.pub
 
+test:
+	@ssh -p2222 -i ${HOME}/.vagrant.d/insecure_private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vagrant@127.0.0.1 ./playbook.yml
+
 retest:
 	vagrant halt
 	vagrant destroy -f
 	vagrant up
 
-all: ca userkey sign retest
+all: ca userkey sign retest test
 
