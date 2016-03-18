@@ -1,7 +1,7 @@
 
 # Create a certificate authority for SSH
 ca:
-	@echo used 'password' as passphrase
+	mkdir -p roles/ssh/files
 	ssh-keygen -f roles/ssh/files/ca_key -P ''
 
 # Create a user's SSH key.
