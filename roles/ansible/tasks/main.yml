@@ -1,0 +1,9 @@
+---
+
+- name: install python-pip
+  become: yes
+  yum: name=python-pip state=installed
+
+- name: install ansible
+  become: yes
+  yum: name=ansible state=latest

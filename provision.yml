@@ -1,0 +1,20 @@
+---
+- name: common stuff for all hosts
+  hosts: all:!local
+  remote_user: "{{ ansible_user }}"
+  become: yes
+  roles:
+    - common
+
+- name: control server setup
+  hosts: control
+  gather_facts: True
+  roles:
+    - ansible
+    - test_ssh
+
+- name: targets ssh setup
+  hosts: targets
+  gather_facts: True
+  roles:
+    - ssh

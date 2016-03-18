@@ -1,0 +1,32 @@
+---
+# Manage SSH for users with signed SSH keys.
+
+- name: 'make sure package openssh-clients is latest'
+  become: yes
+  yum: name=openssh-clients state=latest
+
+- name: 'make sure package openssh-server is latest'
+  become: yes
+  yum: name=openssh-server state=latest
+
+- name: 'make sure CA public key is present'
+  become: yes
+  copy: src=ca_key.pub dest=/etc/ssh/ca_key.pub owner=root group=root
+
+- name: 'make sure all ssh_users have a user'
+  become: yes
+  user: name={{ item }} state=present
+  with_items:
+    - vagrant
+    - userkey
+
+- name: 'build and write /etc/ssh/sshd_config file'
+  become: yes
+  template: src=sshd_config dest=/etc/ssh/sshd_config owner=root group=root mode=0644
+  notify:
+    - restart sshd
+
+- name: 'make sure no user has authorized_keys in their homedir'
+  become: yes
+  shell: rm -f /home/*/.ssh/authorized_keys*
+

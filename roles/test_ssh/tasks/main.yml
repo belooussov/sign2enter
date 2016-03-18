@@ -1,0 +1,12 @@
+---
+
+- name: 'ensure .ssh dir exists for vagrant user'
+  file: path=/home/vagrant/.ssh owner=vagrant group=vagrant mode=0700
+
+- name: 'copy ssh keys to control host'
+  become: no
+  copy: src={{ item }} dest=/home/vagrant/.ssh mode=0600
+  with_items:
+    - id_rsa
+    - id_rsa.pub
+    - id_rsa-cert.pub
